@@ -10,37 +10,40 @@ public class MenuButton : MonoBehaviour
     public GameObject Main;
     public GameObject Options;
     public GameObject Slots;
-  
+    private bool slots = false;
 
     private void Update()
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            slots = false;
             Main.SetActive(false);
             Options.SetActive(true);
-            Slots.SetActive(false);
-           
+            Slots.SetActive(slots);
+
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
+            slots = false;
             Main.SetActive(true);
             Options.SetActive(false);
-            Slots.SetActive(false);
+            Slots.SetActive(slots);
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
-            Slots.SetActive(true);
+            slots = true;
+            Slots.SetActive(slots);
             Options.SetActive(false);
             Main.SetActive(false);
            
-        }else if(Slots == true)
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && slots == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneManager.LoadScene(1);
-            }
+            SceneManager.LoadScene(1);
+        }
+
         }
 
     }
 
-}
