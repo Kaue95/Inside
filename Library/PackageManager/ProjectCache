@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637884250017804032
+      ticks: 637885039411344775
     m_Hash: 3006576431
   m_LockFileStatus:
     m_FilePath: C:/Users/Laboratorio-Info/Desktop/Inside/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637884250017814035
+      ticks: 637885039411344775
     m_Hash: 2379440839
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
