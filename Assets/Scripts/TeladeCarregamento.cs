@@ -10,10 +10,12 @@ public class TeladeCarregamento : MonoBehaviour
     public float TempoFixoSeg = 5;
     public enum TipoCarreg {Carregamento, TempoFixo};
     public TipoCarreg TipodeCarregamento;
-    public Image barradeCarregamento;
+    public Image barradeCarregamento ;
     public Text TextoProgresso;
     private int progresso = 0;
     private string textoOriginal;
+
+    public Slider slider;
 
     void Start()
     {
@@ -30,7 +32,8 @@ public class TeladeCarregamento : MonoBehaviour
         if(TextoProgresso != null) { 
         textoOriginal = TextoProgresso.text;
         }
-        if(barradeCarregamento != null) { 
+        if(barradeCarregamento != null) {
+        Debug.Log("Definiu a barra");
         barradeCarregamento.type = Image.Type.Filled;
         barradeCarregamento.fillMethod = Image.FillMethod.Horizontal;
         barradeCarregamento.fillOrigin = (int) Image.OriginHorizontal.Left;
@@ -41,7 +44,10 @@ public class TeladeCarregamento : MonoBehaviour
         AsyncOperation carregamento = SceneManager.LoadSceneAsync(cena);
         while (!carregamento.isDone)
         {
-            progresso = (int) (carregamento.progress * 100.0f);
+            Debug.Log(carregamento.progress);
+          //  float progresso = Mathf.Clamp01(carregamento.progress / .9f);
+            slider.value = progresso;
+            progresso = (int) (carregamento.progress * 100.0f); 
             yield return null;
            
         }
@@ -60,7 +66,8 @@ public class TeladeCarregamento : MonoBehaviour
             case TipoCarreg.Carregamento:
                 break;
             case TipoCarreg.TempoFixo:
-                progresso = (int)(Mathf.Clamp((Time.time / TempoFixoSeg),0.0f,1.0f) * 100.0f); 
+                float progresso = (Mathf.Clamp((Time.time / TempoFixoSeg),0.0f,1.0f) * 100.0f);
+            
                 break;
 
                 if (TextoProgresso != null)
@@ -69,7 +76,9 @@ public class TeladeCarregamento : MonoBehaviour
                 }
                 if (barradeCarregamento != null)
                 {
+                    Debug.Log("Carregando");
                     barradeCarregamento.fillAmount = (progresso / 100.0f);
+                    
                 }
         }
     }
