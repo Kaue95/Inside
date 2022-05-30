@@ -7,6 +7,9 @@ using System;
 
 public class LoadingBar : MonoBehaviour
 {
+    [SerializeField]
+    public GameObject progress;
+    public GameObject Painel;
     private Slider progressbar;
     public float Speed = 0.01f;
     private float tempo = 0.2f;
@@ -26,43 +29,44 @@ public class LoadingBar : MonoBehaviour
                 if (progressbar.value < 0.5f)
                 {
                    
+                    tempo = 0.1f;
+                    
+                }else if(progressbar.value > 0.5f && progressbar.value < 0.6f)
+                {
+                    Debug.Log("IF 1");
+                    tempo = 0.5f;
+                    
+                }else if (progressbar.value > 0.6f && progressbar.value < 1.5f)
+                {
+                    Debug.Log("IF 2");
+                    tempo = 0.1f;
+
+                }else if (progressbar.value > 1.5f && progressbar.value < 2.0f)
+                {
+                    Debug.Log("IF 3");
                     tempo = 0.2f;
-                    
-                }else if(progressbar.value > 0.5f && progressbar.value < 0.7f)
-                {
-                    Debug.Log("IF 1");
-                    tempo = 1.0f;
-                    
-                }else if (progressbar.value > 1.0f && progressbar.value < 1.5f)
-                {
-                    Debug.Log("IF 1");
-                    tempo = 1.0f;
 
                 }
-
-
-
-
-
-
-
 
                 progressbar.value += 0.02f;
                 yield return new WaitForSeconds(tempo);
 
             }
         }
-       
-       if(progressbar.value == 2)
+        if(progressbar.value == 2)
         {
+            progress.SetActive(false);
+            Painel.SetActive(false);
             SceneManager.LoadScene(1);
         }
 
         
     }
+
+
     private void Update()
     {
-     
+       
     }
 
     //adicionando barra de progresso na barra 
