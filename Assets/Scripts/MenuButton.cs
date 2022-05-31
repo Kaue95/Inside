@@ -6,65 +6,44 @@ using UnityEngine.SceneManagement;
 
 public class MenuButton : MonoBehaviour
 {
-    [SerializeField]
-    public GameObject Main;
-    public GameObject Options;
-    public GameObject Slots;
-    private bool slots = false;
-    private bool sair = false;
-    private bool sairconfirm = false;
+    public GameObject mainMenu;
+    public GameObject optionsMenu;
+    public GameObject slotsMenu;
+    private bool menu = true, options = false, slots = false;
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) && menu == true)
         {
-            
-            sair = false;
-            slots = false;
-            Main.SetActive(false);
-            Options.SetActive(true);
-            Slots.SetActive(slots);
-
+            options = true;
+            menu = false;
+            mainMenu.SetActive(menu);
+            optionsMenu.SetActive(options);
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) && options == true)
         {
-           
-            sair = true;
-            slots = false;
-            Main.SetActive(true);
-            Options.SetActive(false);
-            Slots.SetActive(slots);
+            options = false;
+            menu = true;
+            mainMenu.SetActive(menu);
+            optionsMenu.SetActive(options);
         }
-        else if (Input.GetKey(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.KeypadEnter) && menu == true)
         {
-           
-            sair = false;
             slots = true;
-            Slots.SetActive(slots);
-            Options.SetActive(false);
-            Main.SetActive(false);
+            options = false;
+            menu = false;
+            mainMenu.SetActive(menu);
+            slotsMenu.SetActive(slots);
 
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && slots == true)
+        else if (Input.GetKey(KeyCode.Escape) && slots == true)
         {
-            SceneManager.LoadScene(1);
+            menu = true;
+            slots = false;
+            mainMenu.SetActive(menu);
+            slotsMenu.SetActive(options);
         }
-
-        if (Input.GetKey(KeyCode.DownArrow) && sair == true)
-        {
-            Debug.LogWarning("Saindo");
-
-
-        }
-
     }
 }
-    
 
 
-/*else if (Input.GetKey(KeyCode.DownArrow) && sairconfirm == true)
-        {
-    Debug.LogWarning("Saindo...");
-    Application.Quit();
-    wait*/
